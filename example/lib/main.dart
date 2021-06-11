@@ -45,7 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     getData('1day');
     rootBundle.loadString('assets/depth.json').then((result) {
+      print("111");
       final parseJson = json.decode(result);
+      print("222:$parseJson");
       Map tick = parseJson['tick'];
       var bids = tick['bids']
           .map((item) => DepthEntity(item[0], item[1]))
@@ -57,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
           .cast<DepthEntity>();
       initDepth(bids, asks);
     });
+
+
   }
 
   void initDepth(List<DepthEntity> bids, List<DepthEntity> asks) {
@@ -80,6 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
       item.vol = amount;
       _asks.add(item);
     });
+    print("stop circl");
+    // DataUtil.calculate(datas);
+    // showLoading = false;
     setState(() {});
   }
 
@@ -180,7 +187,9 @@ class _MyHomePageState extends State<MyHomePage> {
   //获取火币数据，需要翻墙
   Future<String> getIPAddress(String period) async {
     var url =
-        'https://api.huobi.br.com/market/history/kline?period=${period ?? '1day'}&size=300&symbol=btcusdt';
+        'https://api.huobi.br.com/market/history/kline?period=${period ?? '1day'}&size=600&symbol=btcusdt';
+    //https://api.huobi.br.com/market/history/kline?period=1day&size=300&symbol=btcusdt
+    print("url:$url");
     String result;
     var response = await http.get(url);
     if (response.statusCode == 200) {

@@ -61,6 +61,10 @@ class ChartPainter extends BaseChartPainter {
             NumberUtil.getMaxDecimalLength(t.open, t.close, t.high, t.low);
       }
     }
+    // print('创建mMainRenderer mMainRect${mMainRect.toString()} \n'
+    //     'aMainMaxValue:$mMainMaxValue\n'
+    //     'aMainMinValue:$mMainMinValue\n'
+    //     'mTopPadding:$mTopPadding\n');
     mMainRenderer ??= MainRenderer(mMainRect, mMainMaxValue, mMainMinValue,
         mTopPadding, mainState, isLine, fixedLength, maDayList);
     if (mVolRect != null) {
@@ -83,6 +87,7 @@ class ChartPainter extends BaseChartPainter {
     Gradient mBgGradient = LinearGradient(
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter,
+      //背景色从上到下渐变的颜色
       colors: bgColor ?? [Color(0xff18191d), Color(0xff18191d)],
     );
     if (mMainRect != null) {

@@ -58,7 +58,11 @@ class DataUtil {
         md = sqrt(md);
         entity.mb = entity.BOLLMA;
         entity.up = entity.mb + k * md;
+
         entity.dn = entity.mb - k * md;
+        if (entity.dn==null){
+          print("==========================================================");
+        }
       }
     }
   }

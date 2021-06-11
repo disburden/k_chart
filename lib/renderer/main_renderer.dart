@@ -210,9 +210,13 @@ class MainRenderer extends BaseChartRenderer<CandleEntity> {
 
   @override
   void drawRightText(canvas, textStyle, int gridRows) {
+    // print("开始画右边的数值");
     double rowSpace = chartRect.height / gridRows;
+    // print("计算出rowSpace：$rowSpace");
+    // print("scaleY:$scaleY minValue:$minValue");
     for (var i = 0; i <= gridRows; ++i) {
       double value = (gridRows - i) * rowSpace / scaleY + minValue;
+      // print("计算出value：$value 公式：($gridRows-$i)*$rowSpace/$scaleY+$minValue");
       TextSpan span = TextSpan(text: "${format(value)}", style: textStyle);
       TextPainter tp =
           TextPainter(text: span, textDirection: TextDirection.ltr);

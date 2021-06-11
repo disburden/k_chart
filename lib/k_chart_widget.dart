@@ -108,6 +108,7 @@ class _KChartWidgetState extends State<KChartWidget>
       mScrollX = mSelectX = 0.0;
       mScaleX = 1.0;
     }
+
     final _painter = ChartPainter(
         datas: widget.datas,
         scaleX: mScaleX,
@@ -271,6 +272,7 @@ class _KChartWidgetState extends State<KChartWidget>
           KLineEntity entity = snapshot.data.kLineEntity;
           double upDown = entity.change ?? entity.close - entity.open;
           double upDownPercent = entity.ratio ?? (upDown / entity.open) * 100;
+          entity.amount = entity.amount==null?0.0:entity.amount;
           infos = [
             getDate(entity.time),
             entity.open.toStringAsFixed(widget.fixedLength),

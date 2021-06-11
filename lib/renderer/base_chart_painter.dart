@@ -84,11 +84,16 @@ abstract class BaseChartPainter extends CustomPainter {
     drawGrid(canvas);
     if (datas != null && datas.isNotEmpty) {
       drawChart(canvas, size);
+      //右边表格刻度值
       drawRightText(canvas);
+      //表格最底部的日期刻度
       drawDate(canvas, size);
       if (isLongPress == true) drawCrossLineText(canvas, size);
+      //画k线图底部的各个值（VOL：MA：MA...几个值）
       drawText(canvas, datas?.last, 5);
+      //画最大值和最小值
       drawMaxAndMin(canvas);
+      //画当前价格
       drawNowPrice(canvas);
     }
     canvas.restore();
@@ -169,7 +174,7 @@ abstract class BaseChartPainter extends CustomPainter {
         minPrice = min(item.low, _findMinMA(item.maValueList));
       } else if (mainState == MainState.BOLL) {
         maxPrice = max(item.up ?? 0, item.high);
-        minPrice = min(item.dn ?? 0, item.low);
+        minPrice = min(item.dn ?? item.low, item.low);
       } else {
         maxPrice = item.high;
         minPrice = item.low;
